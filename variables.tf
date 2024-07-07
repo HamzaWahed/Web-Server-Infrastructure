@@ -5,15 +5,15 @@ variable "server_port" {
 }
 
 output "public_ip" {
-  value       = aws_instance.example.public_ip
-  description = "value of the public IP of the EC2 instance"
+  value       = aws_lb.example.dns_name
+  description = "The public IP of the load balancer"
 }
 
 data "aws_vpc" "default" {
   default = true
 }
 
-data "aws_subnet" "default" {
+data "aws_subnets" "default" {
   filter {
     name   = "vpc-id"
     values = [data.aws_vpc.default.id]
